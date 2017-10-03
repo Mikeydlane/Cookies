@@ -4,13 +4,13 @@ document.addEventListener('DOMContentLoaded', function() {
   let lemonEl = document.getElementById('lemon');
   let chocolateEl = document.getElementById('chocolate');
 
-  let chocolate = Cookies.get('chocolate');
+  let chocolate = Cookies.get('chocolate') || 0;
   chocolateEl.querySelector(".count").innerHTML = chocolate;
 
-  let lemon = Cookies.get('lemon');
+  let lemon = Cookies.get('lemon') || 0;
   lemonEl.querySelector(".count").innerHTML = lemon;
 
-  let sugar = Cookies.get('sugar');
+  let sugar = Cookies.get('sugar') || 0;
   sugarEl.querySelector('.count').innerHTML = sugar;
 
   sugarEl.addEventListener('click', function(e){
@@ -49,29 +49,18 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   })
 
+  document.querySelector('footer h2').addEventListener('click', function() {
+    Cookies.expire('chocolate');
+    Cookies.expire('lemon');
+    Cookies.expire('sugar');
+
+    chocolate = 0;
+    lemon = 0;
+    sugar = 0;
+
+    chocolateEl.querySelector(".count").innerHTML = chocolate;
+    lemonEl.querySelector(".count").innerHTML = lemon;
+    sugarEl.querySelector(".count").innerHTML = sugar;
+  })
+
 });
-
-
-
-//when we click on clear... get rid of all the coffee
-
- document.getElementById("clear").addEventListener("click",function(){
-  Cookies.expire("lemon","sugar", "chocolate");
-    document.getElementById("lemon","sugar", "chocolate").innerText = 0;
-   });
-
-//      // when we have a click, we want to increase the count
-//      console.log(Cookies.get("cookie"));
-//      let cookie_count = ~~Cookies.get("cookie") + 1;
-//      Cookies.set("cookie",cookie_count);
-//      // of our cookie's count...  and update the display
-//      document.getElementById("cookie_count").innerText = cookie_count;
-//   });
-
-//   // when we click on clear... get rid of all the coffee
-//   document.getElementById("clear").addEventListener("click",function(){
-//     Cookies.expire("cookie");
-//     document.getElementById("cookie_count").innerText = 0;
-//   });
-
-// });
